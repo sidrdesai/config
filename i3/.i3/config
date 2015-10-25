@@ -159,10 +159,11 @@ bindsym $mod+r mode "resize"
 
 mode "launch" {
         bindsym f exec --no-startup-id "firefox" mode "default"
-        bindsym p exec --no-startup-id "firefox -private" mode "default"
+        bindsym p exec --no-startup-id "firefox --private-window" mode "default"
         bindsym s exec --no-startup-id "spotify" mode "default"
         bindsym c exec --no-startup-id "chromium" mode "default"
         bindsym d exec --no-startup-id "dwb" mode "default"
+        bindsym z exec --no-startup-id "zathura" mode "default"
 
         bindsym n exec --no-startup-id "i3lock -c 000000" mode "default"
 
@@ -182,9 +183,9 @@ exec --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape"
 
 # Pulse Audio controls
 #increase sound volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 1 +5%" 
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +5%" 
 #decrease sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 1 -5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%"
 # mute sound
 bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 0 toggle"
 
