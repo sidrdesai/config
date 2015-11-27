@@ -17,4 +17,5 @@ autoload -U promptinit
 promptinit
 prompt adam2
 alias ls="ls --color"
+alias octave="octave-cli"
 export PATH=/home/sid/.gem/ruby/2.2.0/bin:$PATH
