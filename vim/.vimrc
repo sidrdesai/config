@@ -22,8 +22,6 @@ set foldmethod=syntax
 
 augroup configgroup
     autocmd!
-    autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md
-        \:call <SID>StripTrailingWhitespaces()
     autocmd FileType php setlocal expandtab
     autocmd FileType php setlocal list
     autocmd FileType php setlocal listchars=tab:+\ ,eol:-
@@ -43,3 +41,5 @@ augroup END
 
 set list
 set listchars=eol:¬,tab:\|\ 
+
+nnoremap <C-O> !!fmt<CR>

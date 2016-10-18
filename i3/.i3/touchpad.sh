@@ -1,10 +1,10 @@
 #!/bin/sh
-# toggle touchpad on and off on hp pavilion dm4
+# toggle touchpad on and off on Lenovo Y50
 
 # use 'xinput list' and 'xinput list-props' to find
 # the correct local value for $PAD
 
-PAD='SynPS/2 Synaptics TouchPad'
+PAD='ETPS/2 Elantech Touchpad'
 
 A=`xinput list-props "$PAD" | sed -n -e 's/.*Device Enabled ([0-9][0-9]*):\t\(.*\)/\1/p' `
 
