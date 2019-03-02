@@ -217,7 +217,7 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 exec --no-startup-id "i3-sensible-terminal"
 
 #get rid of title bar
-new_window pixel 1
+#new_window pixel 1
 
 #set background
 exec --no-startup-id "feh --bg-scale /home/sid/pictures/wallpapers/autumnstreet.jpg"
@@ -227,3 +227,11 @@ exec --no-startup-id "/bin/bash ~/.i3/batt_script.sh"
 
 #float octave plots
 for_window [title="Figure 1"] floating enable
+
+#network manager
+exec --no-startup-id "nm-applet"
+
+#float tool windows
+for_window [class="tool"] floating enable
+for_window [class="Tool"] floating enable
+for_window [class="controller-GameController"] floating enable
