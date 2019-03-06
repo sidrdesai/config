@@ -18,5 +18,7 @@ promptinit
 prompt adam2
 alias ls="ls --color"
 alias octave="octave-cli"
-export PATH=/home/sid/.gem/ruby/2.3.0/bin:$PATH
 export EDITOR=vim
+export NAO_HOME=~/nao/trunk
+source /home/sid/nao/trunk/install/bashrc_addendum
+cd ~/nao/trunk
