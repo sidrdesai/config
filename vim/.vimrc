@@ -3,11 +3,12 @@ set nu
 set rnu
 colorscheme jellybeans 
 
+set autoindent
+set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set smarttab
-set expandtab
 set cursorline
 filetype indent on
 set wildmenu
@@ -22,17 +23,7 @@ set foldmethod=syntax
 
 augroup configgroup
     autocmd!
-    autocmd FileType php setlocal expandtab
-    autocmd FileType php setlocal list
-    autocmd FileType php setlocal listchars=tab:+\ ,eol:-
-    autocmd FileType php setlocal formatprg=par\ -w80\ -T4
-    autocmd FileType ruby setlocal tabstop=2
-    autocmd FileType ruby setlocal shiftwidth=2
-    autocmd FileType ruby setlocal softtabstop=2
-    autocmd FileType ruby setlocal commentstring=#\ %s
-    autocmd FileType python setlocal commentstring=#\ %s
-    autocmd BufEnter *.cls setlocal filetype=java
-    autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+   autocmd FileType python setlocal commentstring=#\ %s
     autocmd BufEnter Makefile setlocal noexpandtab
     autocmd BufEnter *.sh setlocal tabstop=2
     autocmd BufEnter *.sh setlocal shiftwidth=2
@@ -41,5 +32,3 @@ augroup END
 
 set list
 set listchars=eol:¬,tab:\|\ 
-
-nnoremap <C-O> !!fmt<CR>

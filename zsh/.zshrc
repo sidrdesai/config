@@ -15,8 +15,13 @@ compinit
 
 autoload -U promptinit
 promptinit
-prompt adam2
+source ~/config/zsh/prompt.zsh
 alias ls="ls --color"
 alias octave="octave-cli"
-export PATH=/home/sid/.gem/ruby/2.3.0/bin:$PATH
 export EDITOR=vim
+alias sctl="systemctl"
+alias zathura="zathura --fork"
+# Tensorflow env variables
+export LD_LIBRARY_PATH="/opt/cuda/lib64"
+export CUDA_HOME=/opt/cuda/
+export VIRTUAL_ENV_DISABLE_PROMPT=1

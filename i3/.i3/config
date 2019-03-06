@@ -165,6 +165,7 @@ mode "launch" {
         bindsym i exec --no-startup-id "chromium --incognito" mode "default"
         bindsym d exec --no-startup-id "dwb" mode "default"
         bindsym z exec --no-startup-id "zathura" mode "default"
+        bindsym v exec --no-startup-id "/usr/bin/vmpk" mode "default"
 
         bindsym n exec --no-startup-id "i3lock -c 000000" mode "default"
 
@@ -177,6 +178,9 @@ mode "screen" {
         bindsym a exec --no-startup-id "xrandr --output HDMI1 --auto --right-of eDP1" mode "default"
         bindsym o exec --no-startup-id "xrandr --output HDMI1 --off" mode "default"
         bindsym m exec --no-startup-id "xrandr --output HDMI1 --same-as eDP1" mode "default"
+        bindsym k exec --no-startup-id "/usr/bin/setxkbmap -option 'caps:swapescape'" mode "default"
+        bindsym w exec --no-startup-id "~/.i3/wacom_script.sh" mode "default"
+        bindsym s exec --no-startup-id "import -window root ~/screenshot.jpg" mode "default"
 
         bindsym Escape mode "default"
 }
@@ -200,6 +204,9 @@ bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 1 -5%"
 # mute sound
 bindsym $mod+m exec --no-startup-id "pactl set-sink-mute 1 toggle"
 
+#tiMIDIty
+exec --no-startup-id "timidity -iA"
+
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
@@ -220,10 +227,18 @@ exec --no-startup-id "i3-sensible-terminal"
 new_window pixel 1
 
 #set background
-exec --no-startup-id "feh --bg-scale /home/sid/pictures/wallpapers/autumnstreet.jpg"
+exec --no-startup-id "/bin/bash ~/.i3/wallpaper.sh"
+bindsym $mod+b exec --no-startup-id "/bin/bash ~/.i3/wallpaper.sh"
 
 #battery notifications
 exec --no-startup-id "/bin/bash ~/.i3/batt_script.sh"
 
 #float octave plots
-for_window [title="Figure 1"] floating enable
+for_window [class="Octave"] floating enable
+
+#float python figures and apps
+for_window [class="python3.6"] floating enable
+for_window [class="matplotlib"] floating enable
+
+#float vmpk
+for_window [title="Virtual\ MIDI\ Piano\ Keyboard"] floating enable
