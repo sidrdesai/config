@@ -42,7 +42,7 @@ prompt_branch_prev_line() {
 }
 
 venv_info() {
-    [ $VIRTUAL_ENV ] && echo "("`basename $VIRTUAL_ENV`")"
+    [ $VIRTUAL_ENV ] && echo `basename $VIRTUAL_ENV`
 }
 
 prompt_subst_width() {
@@ -55,45 +55,68 @@ prompt_replicate() {
 }
 
 prompt_ps1_line1() {
-  local left_raw="%~"
-  local left_width=$(prompt_subst_width "$left_raw")
-  local left="%F{$prompt_line_fg}${prompt_head_start}${prompt_line}%f%F{$prompt_paren_fg}(%f%B%F{$prompt_distro_fg}${left_raw}%f%b%F{$prompt_paren_fg})%f"
+  local pre_prompt="%F{$prompt_line_fg}${prompt_head_start}${prompt_line}%f"
+  local venv_prompt=""
+  if [ $VIRTUAL_ENV ]; then
+    venv_prompt="$venv_prompt%F{$prompt_paren_fg}(%f"
+    venv_prompt="$venv_prompt%F{$prompt_venv_fg}"$(venv_info)"%f"
+    venv_prompt="$venv_prompt%F{$prompt_paren_fg})%f"
+  fi
+  local dir1_prompt="%F{$prompt_paren_fg}(%f"
+  dir1_prompt="$dir1_prompt%B%F{$prompt_distro_fg}%~%f%b"
+  local dir2_prompt="$dir_prompt%F{$prompt_paren_fg})%f"
+  local host_prompt="%F{$prompt_paren_fg}(%f"
+  host_prompt=$host_prompt"%F{$prompt_host_fg}%(!.%K{$prompt_root_red}.)%n%(!.%K.)@%f"
+  host_prompt=$host_prompt"%F{$prompt_host_fg}%B%m%b%f"
+  host_prompt=$host_prompt"%F{$prompt_paren_fg})%f"
+  host_prompt=$host_prompt"%F{$prompt_line_fg}${prompt_line}%f"
 
-  local right_raw="%n@"$(venv_info)"%m"
-  local right_width=$(prompt_subst_width "$right_raw")
-  #right_raw="%(!.%K{$prompt_root_red}.)%n%(!.%K.)@"$(venv_info)"%B%m%b"  # kinda cheating here
-  #local right="%F{$prompt_paren_fg}(%f%F{$prompt_host_fg}${right_raw}%f%F{$prompt_paren_fg})$f%F{$prompt_line_fg}${prompt_line}%f"
-  local right="%F{$prompt_paren_fg}(%f"
-  right=$right"%F{$prompt_host_fg}%(!.%K{$prompt_root_red}.)%n%(!.%K.)@%f"
-  right=$right"%F{$prompt_venv_fg}"$(venv_info)"%f"
-  right=$right"%F{$prompt_host_fg}%B%m%b%f"
-  right=$right"%F{$prompt_paren_fg})%f"
-  right=$right"%F{$prompt_line_fg}${prompt_line}%f"
+  # First calculate widths
+  local venv_width=0
+  if [ $VIRTUAL_ENV ]; then
+      venv_width=$(( 2 + $(prompt_subst_width $(venv_info)) ))
+  fi
+  local dir_width=$(( 2 + $(prompt_subst_width "%~") ))
+  local host_width=$(( 4 + $(prompt_subst_width "%n%m") ))
 
+  # git disabled for now
+  local git_prompt=""
+  local git_width=0
 
-  # Try to fit both parts:
-  # .-(~/bar/path)----------------(user@host)-
-  local padding_size=$(( COLUMNS - left_width - right_width - (2 + 2 + 2 + 1) ))
+  local left=$pre_prompt$venv_prompt$dir1_prompt$git_prompt$dir2_prompt
+  local right=$host_prompt
+  local left_width=$(( 2 + $venv_width + $dir_width + $git_width))
+  local right_width=$host_width
+
+  # Try to fit all parts:
+  local padding_size=$(( COLUMNS - 2 - venv_width - dir_width - git_width - host_width ))
   if (( padding_size > 0 )); then
-    local padding=$(prompt_replicate "$prompt_line" "$padding_size")
-    echo "${left}%F{$prompt_line_fg}${padding}%f${right}"
+    local padding=%F{$prompt_line_fg}$(prompt_replicate "$prompt_line" "$padding_size")%f
+    echo "${pre_prompt}${venv_prompt}${dir1_prompt}${git_prompt}${dir2_prompt}${padding}${host_prompt}"
     return
   fi
 
-  # Try to fit only left part:
-  # .-(~/bar/path)-------------
-  padding_size=$(( COLUMNS - left_width - (2 + 2 + 1) ))
+  # Try dropping host
+  padding_size=$(( padding_size + host_width ))
   if (( padding_size > 0 )); then
-    local padding=$(prompt_replicate "$prompt_line" "$padding_size")
-    echo "${left}%F{$prompt_line_fg}${padding}%f"
+    local padding=%F{$prompt_line_fg}$(prompt_replicate "$prompt_line" "$padding_size")%f
+    echo "${pre_prompt}${venv_prompt}${dir1_prompt}${git_prompt}${dir2_prompt}${padding}"
     return
   fi
 
-  # Truncate left part:
-  # .-(...ar/path)-
-  left_width=$(( COLUMNS - (2 + 2 + 1) ))
-  left="%F{$prompt_line_fg}${prompt_head_start}${prompt_line}%f(%B%F{$prompt_distro_fg}%$left_width<${prompt_dots}<${left_raw}%<<%f%b)"
-  echo "${left}%F{${prompt_line_fg}}${prompt_line}%f"
+  # Try dropping git
+  padding_size=$(( padding_size + git_width ))
+  if (( padding_size > 0 )); then
+    local padding=%F{$prompt_line_fg}$(prompt_replicate "$prompt_line" "$padding_size")%f
+    echo "${pre_prompt}${venv_prompt}${dir1_prompt}${dir2_prompt}${padding}"
+    return
+  fi
+
+  # Truncate dir:
+  padding_size=$(( padding_size + dir_width - 2))
+  dir1_prompt="%F{$prompt_paren_fg}(%f"
+  dir1_prompt=$dir1_prompt"%B%F{$prompt_distro_fg}%$padding_size<${prompt_dots}<%~%<<%f%b"
+  echo "${pre_prompt}${venv_prompt}${dir1_prompt}${dir2_prompt}"
 }
 
 prompt_ps1_line2() {

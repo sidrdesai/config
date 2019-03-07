@@ -13,8 +13,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-autoload -U promptinit
+autoload -U promptinit colors
 promptinit
+colors
 source ~/config/zsh/prompt.zsh
 alias ls="ls --color"
 alias octave="octave-cli"
@@ -25,3 +26,10 @@ alias zathura="zathura --fork"
 export LD_LIBRARY_PATH="/opt/cuda/lib64"
 export CUDA_HOME=/opt/cuda/
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+#enable autocomplete
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
+bindkey '[Z' autosuggest-accept
+#enable syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
