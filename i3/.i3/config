@@ -161,8 +161,8 @@ mode "launch" {
         bindsym f exec --no-startup-id "firefox" mode "default"
         bindsym p exec --no-startup-id "firefox --private-window" mode "default"
         bindsym s exec --no-startup-id "spotify" mode "default"
-        bindsym c exec --no-startup-id "chromium" mode "default"
-        bindsym i exec --no-startup-id "chromium --incognito" mode "default"
+        bindsym c exec --no-startup-id "chromium-browser" mode "default"
+        bindsym i exec --no-startup-id "chromium-browser --incognito" mode "default"
         bindsym d exec --no-startup-id "dwb" mode "default"
         bindsym z exec --no-startup-id "zathura" mode "default"
 
@@ -230,6 +230,9 @@ for_window [title="Figure 1"] floating enable
 
 #network manager
 exec --no-startup-id "nm-applet"
+
+#screen resolution
+exec --no-startup-id "xrandr -s 1920x1080"
 
 #float tool windows
 for_window [class="tool"] floating enable

@@ -15,10 +15,11 @@ compinit
 
 autoload -U promptinit
 promptinit
-prompt adam2
+source ~/config/zsh/prompt.zsh
 alias ls="ls --color"
 alias octave="octave-cli"
 export EDITOR=vim
+alias grep="grep --color"
 export NAO_HOME=~/nao/trunk
 source /home/sid/nao/trunk/install/bashrc_addendum
 cd ~/nao/trunk
