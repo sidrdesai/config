@@ -5,33 +5,49 @@ URxvt*fading: 30
 URxvt*cursorBlink: true
 URxvt*foreground: White
 URxvt*background: Black
-URxvt*font: xft:DejaVu Sans Mono:size=10
+URxvt*font: xft:DejaVu Sans Mono:size=12
 URxvt*saveLines: 1024
 URxvt*perl-ext-common: default,clipboard
 URxvt.keysym.C-p: perl:clipboard:paste
 URxvt.keysym.C-y: perl:clipboard:copy
-! Colors
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+URxvt.secondaryWheel: 1
+!! Colorscheme
+
+! special
+*.foreground: #93a1a1
+*.background: #141c21
+*.cursorColor: #afbfbf
+
 ! black
-*color0:  #2E3436
-*color8:  #555753
+*.color0: #263640
+*.color8: #4a697d
+
 ! red
-*color1:  #a40000
-*color9:  #EF2929
+*.color1: #d12f2c
+*.color9: #fa3935
+
 ! green
-*color2:  #4E9A06
-*color10: #8AE234
+*.color2: #819400
+*.color10: #a4bd00
+
 ! yellow
-*color3:  #C4A000
-*color11: #FCE94F
+*.color3: #b08500
+*.color11: #d9a400
+
 ! blue
-*color4:  #3465A4
-*color12: #729FCF
-! purple
-*color5:  #75507B
-*color13: #AD7FA8
-! orange (replaces cyan)
-*color6:  #ce5c00
-*color14: #fcaf3e
+*.color4: #2587cc
+*.color12: #2ca2f5
+
+! magenta
+*.color5: #696ebf
+*.color13: #8086e8
+
+! cyan
+*.color6: #289c93
+*.color14: #33c5ba
+
 ! white
-*color7:  #babdb9
-*color15: #EEEEEC
+*.color7: #bfbaac
+*.color15: #fdf6e3

@@ -10,7 +10,7 @@ local prompt_root_red=196
 #local prompt_line_fg="%(!.$prompt_root_red.15)"
 local prompt_line_fg="8"
 local prompt_paren_fg="8"
-local prompt_venv_fg="magenta"
+local prompt_venv_fg="5"
 
 local prompt_head_start="."
 local prompt_line="-"
@@ -42,7 +42,13 @@ prompt_branch_prev_line() {
 }
 
 venv_info() {
-    [ $VIRTUAL_ENV ] && echo `basename $VIRTUAL_ENV`
+    if [ $VIRTUAL_ENV ]; then
+        echo `basename $VIRTUAL_ENV`
+    elif [ $CONDA_PREFIX ]; then
+        echo `basename $CONDA_PREFIX`
+    else
+        echo ""
+    fi
 }
 
 prompt_subst_width() {
@@ -57,7 +63,7 @@ prompt_replicate() {
 prompt_ps1_line1() {
   local pre_prompt="%F{$prompt_line_fg}${prompt_head_start}${prompt_line}%f"
   local venv_prompt=""
-  if [ $VIRTUAL_ENV ]; then
+  if [ $VIRTUAL_ENV ] || [ $CONDA_PREFIX ]; then
     venv_prompt="$venv_prompt%F{$prompt_paren_fg}(%f"
     venv_prompt="$venv_prompt%F{$prompt_venv_fg}"$(venv_info)"%f"
     venv_prompt="$venv_prompt%F{$prompt_paren_fg})%f"
@@ -73,7 +79,7 @@ prompt_ps1_line1() {
 
   # First calculate widths
   local venv_width=0
-  if [ $VIRTUAL_ENV ]; then
+  if [ $VIRTUAL_ENV ] || [ $CONDA_PREFIX ]; then
       venv_width=$(( 2 + $(prompt_subst_width $(venv_info)) ))
   fi
   local dir_width=$(( 2 + $(prompt_subst_width "%~") ))

@@ -161,8 +161,8 @@ mode "launch" {
         bindsym f exec --no-startup-id "firefox" mode "default"
         bindsym p exec --no-startup-id "firefox --private-window" mode "default"
         bindsym s exec --no-startup-id "spotify" mode "default"
-        bindsym c exec --no-startup-id "chromium" mode "default"
-        bindsym i exec --no-startup-id "chromium --incognito" mode "default"
+        bindsym c exec --no-startup-id "google-chrome-stable" mode "default"
+        bindsym i exec --no-startup-id "google-chrome-stable --incognito" mode "default"
         bindsym d exec --no-startup-id "dwb" mode "default"
         bindsym z exec --no-startup-id "zathura" mode "default"
         bindsym v exec --no-startup-id "/usr/bin/vmpk" mode "default"
@@ -176,6 +176,7 @@ bindsym $mod+n mode "launch"
 
 mode "screen" {
         bindsym a exec --no-startup-id "xrandr --output HDMI1 --auto --right-of eDP1" mode "default"
+        bindsym l exec --no-startup-id "xrandr --output HDMI1 --auto --left-of eDP1" mode "default"
         bindsym o exec --no-startup-id "xrandr --output HDMI1 --off" mode "default"
         bindsym m exec --no-startup-id "xrandr --output HDMI1 --same-as eDP1" mode "default"
         bindsym k exec --no-startup-id "/usr/bin/setxkbmap -option 'caps:swapescape'" mode "default"
