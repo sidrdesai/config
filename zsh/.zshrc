@@ -13,6 +13,8 @@ zstyle :compinstall filename '/home/sid/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+autoload -Uz bashcompinit
+bashcompinit
 
 autoload -U promptinit colors
 promptinit
@@ -35,22 +37,23 @@ ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 bindkey '[Z' autosuggest-accept
 #enable syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/sid/.mujoco/mujoco200/bin
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/sid/.mujoco/mujoco210/bin:/usr/lib/nvidia
+export LD_PRELOAD=/usr/lib/libGLEW.so
 
 #conda stuff
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+#__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+#        . "/opt/miniconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/opt/miniconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
 # <<< conda initialize <<<
-conda deactivate
-
+#conda deactivate

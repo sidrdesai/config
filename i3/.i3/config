@@ -31,7 +31,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id wezterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -215,17 +215,15 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease
 # Touchpad controls
 bindsym $mod+F6 exec --no-startup-id ~/.i3/touchpad.sh # toggle touchpad
 
-# Media player controls
-bindsym XF86AudioPlay exec --no-startup-id playerctl play
-bindsym XF86AudioPause exec --no-startup-id playerctl pause
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+# Compositing
+exec --no-startup-id "picom -CGb"
 
 #Start a terminal at startup
-exec --no-startup-id "i3-sensible-terminal"
+exec --no-startup-id "wezterm"
 
 #get rid of title bar
-new_window pixel 1
+for_window [all] border pixel 1
+for_window [all] floating_border pixel 1
 
 #set background
 exec --no-startup-id "/bin/bash ~/.i3/wallpaper.sh"
