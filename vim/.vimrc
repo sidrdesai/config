@@ -15,6 +15,12 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'valloric/youcompleteme'
 Plugin 'wellle/context.vim'
 Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'luochen1990/rainbow'
+Plugin 'kblin/vim-fountain'
+Plugin 'vim-voom/voom'
+
+" YouCompleteMe settings
+set runtimepath+=~/.vim/bundle/YouCompleteMe/
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -58,22 +64,31 @@ nnoremap <space> za
 vnoremap <space> zf
 
 augroup configgroup
-    autocmd!
-    autocmd FileType python setlocal commentstring=#\ %s
-    autocmd BufEnter Makefile setlocal noexpandtab
-    autocmd BufEnter *.sh setlocal tabstop=2
-    autocmd BufEnter *.sh setlocal shiftwidth=2
-    autocmd BufEnter *.sh setlocal softtabstop=2
+    au!
+    au FileType python setlocal commentstring=#\ %s
+    au FileType Makefile setlocal noexpandtab
+    au FileType fountain setlocal spell
+    au BufEnter *.sh setlocal tabstop=2
+    au BufEnter *.sh setlocal shiftwidth=2
+    au BufEnter *.sh setlocal softtabstop=2
 augroup END
 
 set list
 set listchars=trail:_,tab:\|\ 
 
+let g:rainbow_active=1
+
 let g:ale_echo_msg_format = '%linter%: %s'
 set completeopt=menu,menuone,preview,noselect,noinsert
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_virtualtext_cursor=0
 let g:ale_completion_enabled=1
 let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
 let g:ale_linters = {
 \   'rust': ['cargo', 'rls'],
 \}
 "let g:ale_enabled=0
+
+" Disable Copilot by default
+" let g:copilot_enabled = v:false

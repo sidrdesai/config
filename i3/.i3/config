@@ -160,7 +160,7 @@ bindsym $mod+r mode "resize"
 mode "launch" {
         bindsym f exec --no-startup-id "firefox" mode "default"
         bindsym p exec --no-startup-id "firefox --private-window" mode "default"
-        bindsym s exec --no-startup-id "spotify" mode "default"
+        bindsym s exec --no-startup-id "spotify-launcher" mode "default"
         bindsym c exec --no-startup-id "google-chrome-stable" mode "default"
         bindsym i exec --no-startup-id "google-chrome-stable --incognito" mode "default"
         bindsym d exec --no-startup-id "dwb" mode "default"
@@ -213,10 +213,12 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 20 # increase s
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 20 # decrease screen brightness
 
 # Touchpad controls
+exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "Synaptics Tap Action" 0, 0, 0, 0, 1, 3, 2
+
 bindsym $mod+F6 exec --no-startup-id ~/.i3/touchpad.sh # toggle touchpad
 
 # Compositing
-exec --no-startup-id "picom -CGb"
+exec --no-startup-id "picom -b"
 
 #Start a terminal at startup
 exec --no-startup-id "wezterm"
