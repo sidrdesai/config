@@ -23,7 +23,7 @@ source ~/config/zsh/prompt.zsh
 alias ls="ls --color"
 alias grep="grep --color=auto"
 alias octave="octave-cli"
-export EDITOR=vim
+export EDITOR=nvim
 alias sctl="systemctl"
 alias zathura="zathura --fork"
 # Tensorflow env variables

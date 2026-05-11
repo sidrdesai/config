@@ -18,6 +18,7 @@ Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'luochen1990/rainbow'
 Plugin 'kblin/vim-fountain'
 Plugin 'vim-voom/voom'
+Plugin 'supercollider/scvim'
 
 " YouCompleteMe settings
 set runtimepath+=~/.vim/bundle/YouCompleteMe/

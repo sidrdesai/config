@@ -166,6 +166,7 @@ mode "launch" {
         bindsym d exec --no-startup-id "dwb" mode "default"
         bindsym z exec --no-startup-id "zathura" mode "default"
         bindsym v exec --no-startup-id "/usr/bin/vmpk" mode "default"
+        bindsym e exec --no-startup-id "neovide" mode "default"
 
         bindsym n exec --no-startup-id "i3lock -c 000000" mode "default"
 
@@ -179,7 +180,6 @@ mode "screen" {
         bindsym l exec --no-startup-id "xrandr --output HDMI1 --auto --left-of eDP1" mode "default"
         bindsym o exec --no-startup-id "xrandr --output HDMI1 --off" mode "default"
         bindsym m exec --no-startup-id "xrandr --output HDMI1 --same-as eDP1" mode "default"
-        bindsym k exec --no-startup-id "/usr/bin/setxkbmap -option 'caps:swapescape'" mode "default"
         bindsym w exec --no-startup-id "~/.i3/wacom_script.sh" mode "default"
         bindsym s exec --no-startup-id "import -window root ~/screenshot.jpg" mode "default"
 
@@ -193,9 +193,6 @@ bindsym $mod+c mode "screen"
 bar {
         status_command i3status
 }
-
-#Swap escape and caps lock
-exec --no-startup-id /usr/bin/setxkbmap -option "caps:swapescape"
 
 # Pulse Audio controls
 #increase sound volume
@@ -218,7 +215,7 @@ exec --no-startup-id xinput set-prop "ETPS/2 Elantech Touchpad" "Synaptics Tap A
 bindsym $mod+F6 exec --no-startup-id ~/.i3/touchpad.sh # toggle touchpad
 
 # Compositing
-exec --no-startup-id "picom -b"
+# exec --no-startup-id "picom -b"
 
 #Start a terminal at startup
 exec --no-startup-id "wezterm"
