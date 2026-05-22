@@ -25,10 +25,10 @@ alias grep="grep --color=auto"
 alias octave="octave-cli"
 export EDITOR=nvim
 alias sctl="systemctl"
-alias zathura="zathura --fork"
+# alias zathura="zathura --fork"
 # Tensorflow env variables
-export LD_LIBRARY_PATH="/opt/cuda/lib64"
-export CUDA_HOME=/opt/cuda/
+# export LD_LIBRARY_PATH="/opt/cuda/lib64"
+# export CUDA_HOME=/opt/cuda/
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 #enable autocomplete
