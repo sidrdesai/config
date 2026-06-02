@@ -107,12 +107,25 @@ export EDITOR='nvim'
 alias vim="nvim"
 bindkey -v
 
+# zsh-autocomplete binds arrows to 'main'='emacs' at load time (before bindkey -v).
+# Re-apply those widgets explicitly in viins so they work in vim insert mode.
+bindkey -M viins '^[[A' up-line-or-search
+bindkey -M viins '^[[B' down-line-or-select
+bindkey -M viins '^[OA' up-line-or-search
+bindkey -M viins '^[OB' down-line-or-select
+
+# Shift-Tab accepts autosuggestion in vim insert mode
+bindkey -M viins '^[[Z' autosuggest-accept
+
+# Vim-style navigation inside the completion menu
+bindkey -M menuselect 'h' backward-char
+bindkey -M menuselect 'j' down-history
+bindkey -M menuselect 'k' up-history
+bindkey -M menuselect 'l' forward-char
+bindkey -M menuselect '^[' send-break
+
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 source ~/config/zsh/prompt.zsh
-
-# Accept autosuggestion with Shift-Tab
-bindkey -r '^[[Z'
-bindkey '^[[Z' autosuggest-accept
 
 export PATH="$PATH:/opt/nvim"
 source ~/.cargo/env
