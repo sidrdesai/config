@@ -107,12 +107,22 @@ export EDITOR='nvim'
 alias vim="nvim"
 bindkey -v
 
+# zsh-autocomplete's history-search-backward leaves the cursor at position 0 when
+# the buffer was empty, putting the full entry in $RBUFFER. That triggers completions
+# on the empty prefix and corrupts the last character. Always move to end-of-line.
+_history-up() { zle up-line-or-search; zle end-of-line; }
+_history-down() { zle down-line-or-select; zle end-of-line; }
+zle -N _history-up
+zle -N _history-down
+
 # zsh-autocomplete binds arrows to 'main'='emacs' at load time (before bindkey -v).
 # Re-apply those widgets explicitly in viins so they work in vim insert mode.
-bindkey -M viins '^[[A' up-line-or-search
-bindkey -M viins '^[[B' down-line-or-select
-bindkey -M viins '^[OA' up-line-or-search
-bindkey -M viins '^[OB' down-line-or-select
+bindkey -M viins '^[[A' _history-up
+bindkey -M viins '^[[B' _history-down
+bindkey -M viins '^[OA' _history-up
+bindkey -M viins '^[OB' _history-down
+bindkey -M viins '^N' _history-down
+bindkey -M viins '^P' _history-up
 
 # Shift-Tab accepts autosuggestion in vim insert mode
 bindkey -M viins '^[[Z' autosuggest-accept
@@ -122,6 +132,8 @@ bindkey -M menuselect 'h' backward-char
 bindkey -M menuselect 'j' down-history
 bindkey -M menuselect 'k' up-history
 bindkey -M menuselect 'l' forward-char
+bindkey -M menuselect '^N' down-history
+bindkey -M menuselect '^P' up-history
 bindkey -M menuselect '^[' send-break
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
