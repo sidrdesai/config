@@ -70,9 +70,11 @@ ZSH_THEME="jonathan"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions fast-syntax-highlighting zsh-autocomplete)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
+source ~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source ~/.oh-my-zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # User configuration
 
@@ -161,5 +163,22 @@ conda() {
 
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Prepend the default node version's bin so node/npm/npx work without triggering nvm.
+# The alias file may contain a partial version (e.g. "24") so glob-match against installed dirs.
+() {
+    [[ -f "$NVM_DIR/alias/default" ]] || return
+    local alias=${$(< "$NVM_DIR/alias/default")#v}   # strip leading v if present
+    local -a matches=( "$NVM_DIR/versions/node/v${alias}"*(N/) )
+    (( ${#matches} )) || return
+    export PATH="${matches[-1]}/bin:$PATH"
+}
+nvm() {
+    unfunction nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    nvm "$@"
+}
+
+export CUDA_HOME="/usr/local/cuda"
+export PATH="$CUDA_HOME/bin:$PATH"
+export LD_LIBRARY_PATH="$CUDA_HOME/lib64:$LD_LIBRARY_PATH"
