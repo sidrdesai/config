@@ -1,0 +1,16 @@
+[Unit]
+Description=Obsidian vault bisync with Google Drive
+OnFailure=obsidian-sync-notify.service
+
+[Service]
+Type=oneshot
+ExecStart=rclone bisync gdrive:obsidian_vault %h/obsidian_vault \
+  --filter-from %h/config/rclone/obsidian-filter.txt \
+  --conflict-resolve newer \
+  --log-file %h/.local/log/rclone-obsidian.log \
+  --fast-list \
+  --resilient \
+  --recover \
+  --retries 3 \
+  --low-level-retries 10 \
+  --log-level INFO

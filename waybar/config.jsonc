@@ -1,0 +1,82 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 30,
+    "spacing": 4,
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "network",
+        "bluetooth",
+        "battery",
+        "cpu"
+    ],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "clock": {
+        "format": "{:%a %Y-%m-%d  %H:%M}",
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>"
+    },
+    "cpu": {
+        "format": "<span size='x-large'></span>  {usage}%",
+        "interval": 5
+    },
+    "battery": {
+        "format": "<span size='x-large'>{icon}</span>  {capacity}%",
+        "format-charging": "<span size='x-large'></span>  {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "tooltip-format": "{timeTo}, {power}W"
+    },
+    "network": {
+        "format-wifi": "<span size='x-large'></span>  {essid}",
+        "format-ethernet": "  {ifname}",
+        "format-disconnected": "<span size='x-large'>⚠</span>  disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "on-click": "nm-applet --indicator"
+    },
+    "bluetooth": {
+        "format": "",
+        "format-connected": "<span size='x-large'></span>  {device_alias}",
+        "format-disabled": "",
+        "on-click": "blueman-manager"
+    },
+    "pulseaudio": {
+        "format": "<span size='x-large'>{icon}</span>  {volume}%",
+        "format-muted": "<span size='x-large'></span>  muted",
+        "format-icons": {
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol",
+        "scroll-step": 5
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    }
+}

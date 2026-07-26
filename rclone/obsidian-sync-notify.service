@@ -1,0 +1,12 @@
+[Unit]
+Description=Desktop notification when Obsidian sync fails
+
+[Service]
+Type=oneshot
+# Only notify if we actually have internet — a failed sync while offline is
+# expected, not an error. If the ping fails, ExecCondition exits non-zero and
+# systemd skips the unit silently (skipped, not failed).
+ExecCondition=/usr/bin/ping -c 1 -W 3 www.google.com
+ExecStart=/usr/bin/notify-send --urgency=critical --icon=dialog-error \
+  "Obsidian sync failed" \
+  "rclone bisync did not complete. Check ~/.local/log/rclone-obsidian.log — a manual run with --resync may be needed."

@@ -1,0 +1,54 @@
+* {
+    font-family: "Monaspace Neon NF", "Monaspace Neon", sans-serif;
+    font-size: 16px;
+}
+
+window {
+    background-color: rgba(30, 30, 30, 0.96);
+    border: 2px solid #285577;
+    border-radius: 12px;
+}
+
+#outer-box {
+    margin: 12px;
+}
+
+#input {
+    margin: 0 0 10px 0;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+#input image {
+    color: #888888;
+}
+
+#inner-box {
+    background-color: transparent;
+}
+
+#scroll {
+    margin: 0;
+}
+
+#entry {
+    padding: 6px 8px;
+    border-radius: 8px;
+    color: #dddddd;
+}
+
+#entry:selected {
+    background-color: #285577;
+    color: #ffffff;
+}
+
+#entry image {
+    margin-right: 8px;
+}
+
+#text {
+    color: inherit;
+}

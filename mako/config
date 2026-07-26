@@ -1,0 +1,7 @@
+# Auto-dismiss normal notifications after 30 seconds (value is in ms)
+default-timeout=30000
+
+# Urgent notifications stay until dismissed, ignoring any app-set timeout
+[urgency=critical]
+default-timeout=0
+ignore-timeout=1

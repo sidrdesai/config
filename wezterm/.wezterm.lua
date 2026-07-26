@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 return {
 	font = wezterm.font 'Monaspace Neon NF',
-	font_size = 12.0,
+	font_size = 16.0,
 	harfbuzz_features = { 'ss02' },
 	color_scheme = 'Catppuccin Mocha',
 	hide_tab_bar_if_only_one_tab = true,

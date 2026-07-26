@@ -1,0 +1,12 @@
+width=30%
+height=40%
+location=center
+show=drun
+prompt=Launch
+allow_images=true
+insensitive=true
+matching=fuzzy
+hide_scroll=true
+no_actions=true
+gtk_dark=true
+term=wezterm
